@@ -1,0 +1,77 @@
+<!-- Jumbotron -->
+<div class="login">
+  <div class="px-4 py-5 px-md-5 align-items-center text-start content">
+    <div class="container">
+      <div class="row gx-lg-5 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <h1 class="fw-bold ls-tight">
+            Accede a la plataforma<br />
+            <span class="text-primary">para estudiantes y docentes</span>
+          </h1>
+          <p style="color: rgb(117, 127, 142)">
+            ¡Completa el formulario para acceder a tu panel y disfrutar de todas
+            las funcionalidades diseñadas para ti!
+          </p>
+        </div>
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card">
+            <div class="card-body py-5 px-md-5">
+              <form #registerForm>
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    id="form3Example3"
+                    class="form-control"
+                    required
+                    name="userName"
+                    #userName="ngModel"
+                    [ngClass]="userName.errors?.['required'] && (userName.dirty || userName.touched || submit)?'ng-invalid ng-dirty':''"
+                    [(ngModel)]="loginUser.userName"
+                  />
+                  <label class="form-label" for="form3Example3"
+                    >Nombre de usuario</label
+                  >
+                </div>
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <input
+                    type="password"
+                    id="form3Example4"
+                    class="form-control"
+                    required
+                    name="password"
+                    #password="ngModel"
+                    [ngClass]="password.errors?.['required'] && (password.dirty || password.touched || submit)?'ng-invalid ng-dirty':''"
+                    [(ngModel)]="loginUser.password"
+                  />
+                  <label class="form-label" for="form3Example4">
+                    <div class="forgot-password">
+                      <p class="m-0">Contraseña</p>
+                      <a routerLink="" class="text-info fw-bold"
+                        >Olvidaste tu contraseña?</a
+                      >
+                    </div>
+                  </label>
+                </div>
+                <div class="row">
+                  <small class="col-sm-12">
+                    <a routerLink="/auth/register" class="text-info fw-bold"
+                      >No tienes una cuenta? Regístrate</a
+                    >
+                  </small>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary mb-4" (click)="login(loginUser)">
+                  Iniciar sesión
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Jumbotron -->

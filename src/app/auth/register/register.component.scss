@@ -1,0 +1,25 @@
+.register{
+  min-height: 100vh;
+  background-color: #f4f3ef;
+  & .content {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.perfil{
+  background-color: white;
+  font-weight: normal;
+  color: #9a9a9a;
+  border: 1px solid #9a9a9a67;
+  margin-top: 0;
+}
+
+.ng-invalid .ng-dirty{
+  border: 1px solid rgba(255, 0, 0, 0.678);
+}
+
+select option[disabled] {
+	display: none;
+}
