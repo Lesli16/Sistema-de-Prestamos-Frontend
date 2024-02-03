@@ -15,23 +15,20 @@ export class RegisterComponent {
 
   newUser: RegisterUser = {} as RegisterUser;
   submit: boolean = false;
-
+  selectedRole: any = '';
   roles = [
     { value: 'student', description: 'Estudiante' },
     { value: 'teacher', description: 'Docente' },
   ];
-
 
   constructor(
     private authSrv: AuthService,
     private toastSrv: ToastrService,
     private router: Router
   ) {}
-  selectedRole(role: any) {
-    console.log(role);
-    this.newUser.role = role.value;
-  }
+
   handleSignup(newUser: RegisterUser) {
+    newUser.role = this.selectedRole.value;
     console.log(newUser);
     if (this.form.invalid) {
       this.toastSrv.error(

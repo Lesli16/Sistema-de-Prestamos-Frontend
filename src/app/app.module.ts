@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AdminLayoutComponent } from './admin/admin.component';
-import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -27,8 +27,8 @@ import {HttpClientModule} from '@angular/common/http'
     ToastrModule.forRoot(),
     FooterModule,
     FixedPluginModule,
-    FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,10 +16,16 @@
   margin-top: 0;
 }
 
-.ng-invalid .ng-dirty{
+.invalid__input{
   border: 1px solid rgba(255, 0, 0, 0.678);
 }
 
-select option[disabled] {
-	display: none;
+.text-color-title{
+  color: #51cbce;
+}
+::ng-deep.p-dropdown .p-dropdown-label.p-placeholder,
+::ng-deep.p-dropdown.p-dropdown-clearable .p-dropdown-label{
+  padding: 6px 12px ;
+  color: #9a9a9a;
+  font-size: 14px;
 }

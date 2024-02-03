@@ -13,13 +13,18 @@ import { NotificationsComponent }   from '../pages/notifications/notifications.c
 import { UpgradeComponent }         from '../pages/upgrade/upgrade.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { EquipmentComponent } from './equipment/equipment.component';
+import { EquipmentClassificationComponent } from './equipment-classification/equipment-classification.component';
+import { SharedModule } from '../shared/shared.module';
+import { FileUploadModule } from 'primeng/fileupload';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     NgbModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule,
+    FileUploadModule
   ],
   declarations: [
     DashboardComponent,
@@ -30,6 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    EquipmentComponent,
+    EquipmentClassificationComponent,
   ]
 })
 

@@ -1,0 +1,19 @@
+.invalid__input {
+  border: 1px solid rgba(255, 0, 0, 0.678);
+}
+::ng-deep.p-dropdown .p-dropdown-label.p-placeholder,
+::ng-deep.p-dropdown.p-dropdown-clearable .p-dropdown-label {
+  padding: 6px 12px;
+  color: #9a9a9a;
+  font-size: 14px;
+}
+
+::ng-deep.p-fluid .p-fileupload .p-button{
+  padding: 6px 12px !important;
+  background-color: #51cbce;
+  border: 1px solid #51cbce;
+}
+
+::ng-deep.p-dialog .p-dialog-header .p-dialog-header-icon {
+  display: none;
+}

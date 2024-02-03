@@ -10,13 +10,15 @@ import { MapsComponent } from '../pages/maps/maps.component';
 import { NotificationsComponent } from '../pages/notifications/notifications.component';
 import { UpgradeComponent } from '../pages/upgrade/upgrade.component';
 import { AdminLayoutComponent } from './admin.component';
+import { EquipmentComponent } from './equipment/equipment.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
     children: [
-      { path: 'home', component: DashboardComponent },
+      { path: 'inicio', component: DashboardComponent },
+      { path: 'equipos', component: EquipmentComponent },
       { path: 'user', component: UserComponent },
       { path: 'table', component: TableComponent },
       { path: 'typography', component: TypographyComponent },

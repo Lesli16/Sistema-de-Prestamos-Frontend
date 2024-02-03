@@ -1,0 +1,141 @@
+<div class="card card-stats">
+  <div class="card-body">
+    <div class="row">
+      <div
+        class="flex align-items-center justify-content-between col-12 flex-column md:flex-row col-md-8"
+      >
+        <p class="text-2xl mb-0">Solicitud de préstamo de equipos</p>
+        <button
+          pButton
+          pRipple
+          type="submit"
+          class="p-button p-button-danger"
+          [disabled]="!equipmentsSelection.length"
+          (click)="deleteAllItemsFromList(equipmentsSelection)"
+        >
+          Eliminar todos los equipos de la lista
+        </button>
+        <button
+          pButton
+          pRipple
+          type="submit"
+          class="p-button p-button-info"
+          [disabled]="!equipmentsSelection.length"
+          (click)="createLoanRequest(equipmentsSelection)"
+        >
+          Enviar solicitud
+        </button>
+      </div>
+    </div>
+    <div class="flex flex-column">
+      <label class="text-lg" style="color: #757575">
+        Duración del préstamo <i class="fa-regular fa-clock"></i>
+      </label>
+      <p-calendar
+        class="mb-4"
+        placeholder="Seleccionar fecha"
+        [(ngModel)]="loanDuration"
+        [readonlyInput]="true"
+        dateFormat="yy/mm/dd"
+        [minDate]="minDate"
+      ></p-calendar>
+    </div>
+    <h5
+      class="text-center p-6"
+      style="color: #9a9a9a"
+      *ngIf="!equipmentsSelection.length"
+    >
+      ¡Ups! Parece que aún no has seleccionado ningún equipo. ¡Selecciona uno y
+      vuelve a esta pantalla para continuar!
+    </h5>
+
+    <p-table
+      *ngIf="equipmentsSelection.length"
+      [value]="equipmentsSelection"
+      [tableStyle]="{ 'min-width': '50rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th class="col-1">Modelo</th>
+          <th class="col-5">Descripción</th>
+          <th>Cantidad</th>
+          <th>Disponibles</th>
+          <th>Eliminar</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ rowIndex + 1 }}</td>
+          <td>{{ item.equipment.name }}</td>
+          <td>
+            {{ item.equipment.model ? item.equipment.model : "No registra" }}
+          </td>
+          <td>
+            {{
+              item.equipment.description
+                ? item.equipment.description
+                : "No registra"
+            }}
+          </td>
+          <td>
+            <input
+              type="number"
+              class="form-control w-4rem"
+              name="quantity"
+              #quantity="ngModel"
+              min="1"
+              max="{{ item.equipment.availableQuantity }}"
+              [(ngModel)]="item.quantity"
+            />
+          </td>
+          <td>{{ item.equipment.availableQuantity }}</td>
+          <td>
+            <button
+              pButton
+              pRipple
+              icon="fa-solid fa-trash"
+              class="p-button-rounded p-button-danger"
+              (click)="deleteItemFromList(item.id)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-dialog
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '30vw' }"
+    [draggable]="false"
+    [resizable]="false"
+    [closeOnEscape]="false"
+    [closable]="false"
+  >
+    <div class="flex flex-column">
+      <h3 class="text-center font-bold">
+        Solicitud enviada
+        <i class="fa-regular fa-circle-check text-green-400"></i>
+      </h3>
+      <p class="m-0">
+        Tu solicitud de préstamo ha sido enviada. Para conocer su estado, revisa
+        tu historial de solicitudes haciendo clic en
+        <a
+          routerLink="/usuario/historial-prestamos"
+          class="font-italic underline text-info"
+          >Historial de préstamos.</a>
+        <br />
+        Una vez aprobada, podrás descargar la solicitud en formato PDF.
+      </p>
+      <button
+        type="submit"
+        class="btn btn-primary mb-4"
+        routerLink="/usuario/historial-prestamos"
+      >
+        Historial Préstamos
+      </button>
+    </div>
+  </p-dialog>
+</div>

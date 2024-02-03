@@ -39,9 +39,9 @@ export class LoginComponent {
           positionClass: 'toast-top-center',
         });
         if(data.response === 'ROLE_STUDENT' || data.response === 'ROLE_TEACHER'){
-          this.router.navigateByUrl('/home')
+          this.router.navigateByUrl('/usuario')
         }else{
-          this.router.navigateByUrl('/admin/home')
+          this.router.navigateByUrl('/admin/inicio')
         }
       },
       error: (error) => {
