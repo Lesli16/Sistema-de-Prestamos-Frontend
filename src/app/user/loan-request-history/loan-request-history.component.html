@@ -1,0 +1,165 @@
+<div class="card card-stats">
+  <div class="card-body">
+    <div class="row">
+      <div
+        class="flex align-items-center justify-content-between col-12 flex-column md:flex-row col-md-8"
+      >
+        <p class="text-2xl mb-0">Historial de solicitudes de préstamo</p>
+      </div>
+      <div class="mb-4">
+        <p class="mb-2">Estados disponibles</p>
+        <div class="flex flex-wrap gap-4">
+          <div class="flex align-items-center gap-1">
+            <span
+              class="w-1rem h-1rem block border-circle"
+              style="background-color: #22c55e"
+            ></span>
+            <p class="m-0">Aprobado</p>
+          </div>
+          <div class="flex align-items-center gap-1">
+            <span
+              class="w-1rem h-1rem block border-circle"
+              style="background-color: #f59e0b"
+            ></span>
+            <p class="m-0">Pendiente</p>
+          </div>
+          <div class="flex align-items-center gap-1">
+            <span
+              class="w-1rem h-1rem block border-circle"
+              style="background-color: #ef4444"
+            ></span>
+            <p class="m-0">Rechazado</p>
+          </div>
+        </div>
+      </div>
+      <p><span class="font-bold">IMPORTANTE :</span> Podrás descargar tu solicitud en formato PDF únicamente después de que haya sido aprobada.</p>
+    </div>
+
+    <p-table
+      [value]="loanRequest"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      styleClass="p-datatable-sm p-datatable-striped"
+      dataKey="id"
+      [paginator]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#</th>
+          <th>Fecha de creación</th>
+          <th># Equipos solicitados</th>
+          <th>Estado</th>
+          <th>Fecha límite</th>
+          <th>Detalle</th>
+          <th>Descargar PDF</th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-item
+        let-rowIndex="rowIndex"
+        let-expanded="expanded"
+      >
+        <tr>
+          <td>{{ rowIndex + 1 }}</td>
+          <td>{{ item.dateCreated }}</td>
+          <td>{{ item.selectedEquipments.length }}</td>
+          <td>
+            <p-tag
+              [value]="item.loanRequestStatus.status"
+              [severity]="getStatusSeverity(item.loanRequestStatus.status)"
+            ></p-tag>
+          </td>
+          <td>{{ item.loanDuration }}</td>
+          <td>
+            <p-button
+              [pRowToggler]="item"
+              label="Ver"
+              icon="nc-icon nc-minimal-down"
+              styleClass="p-button-text p-button-raised p-button-info"
+            ></p-button>
+          </td>
+          <td>
+            <span style="color: #9a9a9a;" *ngIf="item.loanRequestStatus.status === 'RECHAZADO' || item.loanRequestStatus.status === 'PENDIENTE'" >No disponible</span>
+            <p-button
+            *ngIf="item.loanRequestStatus.status === 'APROBADO'"
+            label="Pdf"
+            icon="fa-solid fa-download"
+            styleClass="p-button-text p-button-raised p-button-secondary"
+            (click)="downLoadPdf()"
+          ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="12">
+            <h5 class="text-center p-6" style="color: #9a9a9a">
+              Aún no has realizado ninguna solicitud de préstamo. Realiza una
+              solicitud y aquí podrás encontrar un registro de todas las
+              solicitudes que hayas hecho.
+            </h5>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="rowexpansion" let-item>
+        <tr>
+          <td colspan="7">
+            <div class="p-3">
+              <div class="row">
+                <div
+                  class="flex align-items-center justify-content-between col-12 flex-column md:flex-row col-md-8"
+                >
+                  <p class="text-2xl mb-0" style="color: #9a9a9a">
+                    Detalle equipos solicitados
+                  </p>
+                </div>
+              </div>
+              <p-table
+                [value]="item.selectedEquipments"
+                styleClass="p-datatable-striped"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Modelo</th>
+                    <th>Clasificación</th>
+                    <th>Cantidad</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                  <tr>
+                    <td>{{ rowIndex + 1 }}</td>
+                    <td>{{ data.equipment.name }}</td>
+                    <td class="col-4">
+                      {{
+                        data.equipment.description
+                          ? data.equipment.description
+                          : "No registra"
+                      }}
+                    </td>
+                    <td>
+                      {{
+                        data.equipment.model
+                          ? data.equipment.model
+                          : "No registra"
+                      }}
+                    </td>
+                    <td>{{ data.equipment.equipmentClassification.name }}</td>
+                    <td>{{ data.quantity }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

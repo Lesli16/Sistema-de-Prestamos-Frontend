@@ -9,13 +9,29 @@ import { LoanRequest } from '../models/loan-request';
 })
 export class LoanRequestService {
   private apiUrl = environment.apiUrl;
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
-  createLoanRequest(loanRequest:LoanRequest){
-    return this.httpClient.post(`${this.apiUrl}/loan-request`, loanRequest, {withCredentials:true});
+  createLoanRequest(loanRequest: LoanRequest) {
+    return this.httpClient.post(`${this.apiUrl}/loan-request`, loanRequest, { withCredentials: true });
   }
 
-  getAllLoanRequest():Observable<LoanRequest[]>{
-    return this.httpClient.get<LoanRequest[]>(`${this.apiUrl}/loan-request`, {withCredentials:true});
+  getAllLoanRequest(): Observable<LoanRequest[]> {
+    return this.httpClient.get<LoanRequest[]>(`${this.apiUrl}/loan-request`, { withCredentials: true });
+  }
+
+  getAllLoanRequestByUserName(): Observable<LoanRequest[]> {
+    return this.httpClient.get<LoanRequest[]>(`${this.apiUrl}/loan-request/all/by-username`, { withCredentials: true });
+  }
+
+  getAllPendingStatusLoanRequest(): Observable<LoanRequest[]> {
+    return this.httpClient.get<LoanRequest[]>(`${this.apiUrl}/loan-request/status/pending`, { withCredentials: true });
+  }
+
+  approveOrDenyLoanRequest(loanRequestId: string, status: string): Observable<any> {
+    return this.httpClient.put(`${this.apiUrl}/loan-request/approve-deny`,null, { withCredentials: true,
+      params: {
+        loanRequestId: loanRequestId,
+        status: status
+      }});
   }
 }

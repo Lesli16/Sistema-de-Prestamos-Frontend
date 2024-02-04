@@ -10,7 +10,7 @@ export const routingConfiguration: ExtraOptions = {
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'auth',
     pathMatch: 'full',
   },
   {
@@ -28,7 +28,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: 'auth',
   },
 ];
 @NgModule({

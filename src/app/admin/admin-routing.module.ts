@@ -6,11 +6,11 @@ import { UserComponent } from '../pages/user/user.component';
 import { TableComponent } from '../pages/table/table.component';
 import { TypographyComponent } from '../pages/typography/typography.component';
 import { IconsComponent } from '../pages/icons/icons.component';
-import { MapsComponent } from '../pages/maps/maps.component';
 import { NotificationsComponent } from '../pages/notifications/notifications.component';
 import { UpgradeComponent } from '../pages/upgrade/upgrade.component';
 import { AdminLayoutComponent } from './admin.component';
 import { EquipmentComponent } from './equipment/equipment.component';
+import { LoanRequestsToApproveComponent } from './loan-requests-to-approve/loan-requests-to-approve.component';
 
 const routes: Routes = [
   {
@@ -19,16 +19,16 @@ const routes: Routes = [
     children: [
       { path: 'inicio', component: DashboardComponent },
       { path: 'equipos', component: EquipmentComponent },
+      { path: 'aprobar-solicitudes', component: LoanRequestsToApproveComponent },
       { path: 'user', component: UserComponent },
       { path: 'table', component: TableComponent },
       { path: 'typography', component: TypographyComponent },
       { path: 'icons', component: IconsComponent },
-      { path: 'maps', component: MapsComponent },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'upgrade', component: UpgradeComponent },
       {
         path: '**',
-        redirectTo: 'admin',
+        redirectTo: 'equipos',
         pathMatch: 'full',
       }
     ],

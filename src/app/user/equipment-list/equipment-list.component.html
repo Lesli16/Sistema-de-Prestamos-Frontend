@@ -3,39 +3,24 @@
     <div class="row">
       <div class="flex align-items-center justify-content-between col-12 flex-column md:flex-row col-md-8">
         <p class="text-2xl mb-0">Listado de equipos</p>
-        <button type="submit" class="btn btn-primary" routerLink="/usuario/solicitud-prestamo">Realizar solicitud de préstamo</button>
+        <button type="submit" class="btn btn-primary" routerLink="/usuario/solicitud-prestamo">Realizar solicitud de
+          préstamo</button>
       </div>
     </div>
-    <p-dataView
-      #dv
-      [value]="equipments"
-      layout="grid"
-      emptyMessage="No se encontraron resultados"
-      filterBy="name"
-      [rows]="12"
-      [paginator]="true"
-    >
+    <p-dataView #dv [value]="equipments" layout="grid" emptyMessage="No se encontraron resultados" filterBy="name"
+      [rows]="12" [paginator]="true">
       <ng-template pTemplate="header">
         <div class="grid grid-nogutter flex gap-4">
           <div class="flex flex-column md:flex-row md:justify-content-between">
-            <p-dropdown
-              [options]="options"
-              placeholder="Ordenar por"
-              (onChange)="onSortChange($event)"
-              styleClass="mb-2 md:mb-0"
-            >
+            <p-dropdown [options]="options" placeholder="Ordenar por" (onChange)="onSortChange($event)"
+              styleClass="mb-2 md:mb-0">
             </p-dropdown>
           </div>
           <div class="flex flex-column md:flex-row md:justify-content-between">
             <span class="p-input-icon-left mb-2 md:mb-0">
               <i class="fa-solid fa-magnifying-glass"></i>
-              <input
-                type="search"
-                pInputText
-                style="padding-left: 2rem !important;"
-                placeholder="Buscar equipo"
-                (input)="dv.filter($event.target.value)"
-              />
+              <input type="search" pInputText style="padding-left: 2rem !important;" placeholder="Buscar equipo"
+                (input)="dv.filter($event.target.value)" />
             </span>
           </div>
         </div>
@@ -44,41 +29,29 @@
       <ng-template let-equipment pTemplate="gridItem">
         <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
           <div class="p-4 border-1 surface-border surface-card border-round">
-            <div
-              class="flex flex-wrap align-items-center justify-content-between gap-2"
-            >
+            <div class="flex flex-wrap align-items-center justify-content-between gap-2">
               <span class="flex align-items-center gap-2">
                 <i class="fa-solid fa-tag"></i>
                 <span class="font-semibold">{{
                   equipment.equipmentClassification.name
-                }}</span>
+                  }}</span>
               </span>
-              <p-tag
-                [value]="getEquipmentStatus(equipment)"
-                [severity]="getSeverity(equipment)"
-              ></p-tag>
+              <p-tag [value]="getEquipmentStatus(equipment)" [severity]="getSeverity(equipment)"></p-tag>
             </div>
             <div class="flex flex-column align-items-center gap-3 py-5">
-              <div *ngIf="!equipment.image; else noImage">
-                <div
-                  class="h-5rem w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block border-round"
-                >
-                  <i
-                    class="flex align-items-center justify-content-center h-full fa-solid fa-image text-6xl"
-                  ></i>
-                </div>
+              <div class="h-15rem w-full shadow-2 block border-round" *ngIf="!equipment.image; else image">
+                <i class="h-full flex align-items-center justify-content-center nc-icon nc-album-2 text-8xl"></i>
               </div>
-              <ng-template #noImage>
-                <img
-                  [src]="decodeImage(equipment.image)"
-                  [alt]="equipment.name"
-                  class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
-                />
+              <ng-template #image>
+                <div class="h-15rem w-full">
+                  <img [src]="decodeImage(equipment.image)" [alt]="equipment.name"
+                    class="w-full h-full image-size shadow-2 block border-round" />
+                </div>
               </ng-template>
-              <div class="text-2xl font-bold">{{ equipment.name }}</div>
-              <small class="text-gray-600" *ngIf="equipment.model"
-                >Modelo: {{ equipment.model }}</small
-              >
+              <div class="w-full flex flex-column xl:flex-row justify-content-between align-items-center">
+                <div class="text-2xl font-bold">{{ equipment.name }}</div>
+                <small class="text-gray-600" *ngIf="equipment.model">Modelo: {{ equipment.model }}</small>
+              </div>
               <p class="flex align-items-start" *ngIf="equipment.description">
                 {{ equipment.description }}
               </p>
@@ -90,25 +63,14 @@
             <div class="flex align-items-center justify-content-between">
               <div class="flex align-items-center gap-2">
                 <label class="form-label label-input mb-0">Cantidad</label>
-                <input
-                  type="number"
-                  class="form-control w-4rem"
-                  name="quantity"
-                  [disabled]="equipment.availableQuantity === 0"
-                  min="1"
-                  max="{{ equipment.availableQuantity }}"
+                <input type="number" class="form-control w-4rem" name="quantity"
+                  [disabled]="equipment.availableQuantity === 0" min="1" max="{{ equipment.availableQuantity }}"
                   #quantity="ngModel"
                   [ngClass]="quantity.errors?.['required'] && (quantity.dirty || quantity.touched)?'invalid__input':''"
-                  [(ngModel)]="equipment.quantity"
-                />
+                  [(ngModel)]="equipment.quantity" />
               </div>
-              <button
-                (click)="addEquipmentToCar(equipment)"
-                pButton
-                icon="fa-solid fa-cart-shopping"
-                class="p-button-rounded"
-                [disabled]="equipment.availableQuantity === 0"
-              ></button>
+              <button (click)="addEquipmentToCar(equipment)" pButton icon="nc-icon nc-simple-add"
+                class="p-button-rounded" [disabled]="equipment.availableQuantity === 0"></button>
             </div>
           </div>
         </div>

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
 
-import { FixedPluginModule } from './shared/fixedplugin/fixedplugin.module';
-import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 
@@ -25,8 +23,6 @@ import { SharedModule } from './shared/shared.module'
     SidebarModule,
     NavbarModule,
     ToastrModule.forRoot(),
-    FooterModule,
-    FixedPluginModule,
     HttpClientModule,
     SharedModule
   ],

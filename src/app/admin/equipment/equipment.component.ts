@@ -85,7 +85,6 @@ export class EquipmentComponent implements OnInit {
       'equipment',
       new Blob([JSON.stringify(equipment)], { type: 'application/json' })
     );
-    console.log(equipment)
 
     if (equipment.image) {
       const arrayBuffer = this.base64ToArrayBuffer(equipment.image);

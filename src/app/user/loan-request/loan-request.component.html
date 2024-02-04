@@ -5,31 +5,11 @@
         class="flex align-items-center justify-content-between col-12 flex-column md:flex-row col-md-8"
       >
         <p class="text-2xl mb-0">Solicitud de préstamo de equipos</p>
-        <button
-          pButton
-          pRipple
-          type="submit"
-          class="p-button p-button-danger"
-          [disabled]="!equipmentsSelection.length"
-          (click)="deleteAllItemsFromList(equipmentsSelection)"
-        >
-          Eliminar todos los equipos de la lista
-        </button>
-        <button
-          pButton
-          pRipple
-          type="submit"
-          class="p-button p-button-info"
-          [disabled]="!equipmentsSelection.length"
-          (click)="createLoanRequest(equipmentsSelection)"
-        >
-          Enviar solicitud
-        </button>
       </div>
     </div>
     <div class="flex flex-column">
       <label class="text-lg" style="color: #757575">
-        Duración del préstamo <i class="fa-regular fa-clock"></i>
+        Fecha límite <i class="fa-regular fa-clock"></i>
       </label>
       <p-calendar
         class="mb-4"
@@ -37,6 +17,9 @@
         [(ngModel)]="loanDuration"
         [readonlyInput]="true"
         dateFormat="yy/mm/dd"
+        required
+        #loanDuration2="ngModel"
+        [ngClass]="loanDuration2.errors?.['required'] && (submit)?'ng-invalid ng-dirty':''"
         [minDate]="minDate"
       ></p-calendar>
     </div>
@@ -54,6 +37,21 @@
       [value]="equipmentsSelection"
       [tableStyle]="{ 'min-width': '50rem' }"
     >
+    <ng-template pTemplate="caption">
+      <div class="flex gap-4 flex-column  md:flex-row">
+        <p-button
+        label="Enviar solicitud"
+        styleClass="p-button-raised  p-button-info"
+        (click)="createLoanRequest(equipmentsSelection)"
+        ></p-button>
+        <p-button
+        label="Eliminar todos los equipos de la lista"
+        styleClass="p-button-raised  p-button-danger"
+        (click)="deleteAllItemsFromList(equipmentsSelection)"
+      ></p-button>
+      </div>
+    </ng-template>
+
       <ng-template pTemplate="header">
         <tr>
           <th>#</th>
@@ -125,7 +123,8 @@
         <a
           routerLink="/usuario/historial-prestamos"
           class="font-italic underline text-info"
-          >Historial de préstamos.</a>
+          >Historial de préstamos.</a
+        >
         <br />
         Una vez aprobada, podrás descargar la solicitud en formato PDF.
       </p>

@@ -16,10 +16,10 @@ import { Equipment } from 'src/helpers/models/equipment';
 })
 export class LoanRequestComponent implements OnInit {
   equipmentsSelection: EquipmentSelection[] = [];
-  loanDuration: Date = new Date();
+  loanDuration!: Date;
   minDate: Date = new Date();
   visible: boolean = false;
-
+  submit:boolean = false;
   constructor(
     private equipmentSelectionSrv: EquipmentSelectionService,
     private toastSrv: ToastrService,
@@ -67,6 +67,13 @@ export class LoanRequestComponent implements OnInit {
   }
 
   createLoanRequest(equipmentSelection: EquipmentSelection[]) {
+    if (!this.loanDuration) {
+      this.toastSrv.warning('Selecciona una fecha límite del préstamo','Falta información',{
+        positionClass: 'toast-top-center',
+      })
+      this.submit = true
+      return;
+    }
     let loanSelectedEquipment: LoanSelectedEquipment[] = [];
     equipmentSelection.forEach((data) =>
       loanSelectedEquipment.push({
@@ -80,7 +87,10 @@ export class LoanRequestComponent implements OnInit {
       loanDuration: this.loanDuration,
     };
     this.loanRequestSrv.createLoanRequest(loanRequest).subscribe({
-      next: () => (this.visible = true),
+      next: () => {
+        this.visible = true
+        this.submit = false
+      },
       error: (err) => {
         this.toastSrv.error(err.error.response,'',{
           timeOut: 4000,
