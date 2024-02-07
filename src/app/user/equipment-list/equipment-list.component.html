@@ -39,13 +39,13 @@
               <p-tag [value]="getEquipmentStatus(equipment)" [severity]="getSeverity(equipment)"></p-tag>
             </div>
             <div class="flex flex-column align-items-center gap-3 py-5">
-              <div class="h-15rem w-full shadow-2 block border-round" *ngIf="!equipment.image; else image">
+              <div class="h-15rem w-full block border-round" *ngIf="!equipment.image; else image">
                 <i class="h-full flex align-items-center justify-content-center nc-icon nc-album-2 text-8xl"></i>
               </div>
               <ng-template #image>
                 <div class="h-15rem w-full">
                   <img [src]="decodeImage(equipment.image)" [alt]="equipment.name"
-                    class="w-full h-full image-size shadow-2 block border-round" />
+                    class="w-full h-full image-size block border-round" />
                 </div>
               </ng-template>
               <div class="w-full flex flex-column xl:flex-row justify-content-between align-items-center">
@@ -60,7 +60,13 @@
                 {{ equipment.availableQuantity }}
               </p>
             </div>
+            <div class="flex justify-content-start align-items-start">
+              <p class="flex align-items-start" *ngIf="equipment.location">
+                <small class="form-label label-input mb-0"><i class="nc-icon nc-pin-3"></i> Ubicación:  {{ equipment.location }} </small>
+              </p>
+            </div>
             <div class="flex align-items-center justify-content-between">
+
               <div class="flex align-items-center gap-2">
                 <label class="form-label label-input mb-0">Cantidad</label>
                 <input type="number" class="form-control w-4rem" name="quantity"

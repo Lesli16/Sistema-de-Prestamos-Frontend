@@ -4,7 +4,7 @@
       <div
         class="flex align-items-center justify-content-between col-12 flex-column md:flex-row col-md-8"
       >
-        <p class="text-2xl mb-0">Historial de solicitudes de préstamo</p>
+        <p class="text-2xl">Historial de préstamos</p>
       </div>
       <div class="mb-4">
         <p class="mb-2">Estados disponibles</p>
@@ -14,14 +14,7 @@
               class="w-1rem h-1rem block border-circle"
               style="background-color: #22c55e"
             ></span>
-            <p class="m-0">Aprobado</p>
-          </div>
-          <div class="flex align-items-center gap-1">
-            <span
-              class="w-1rem h-1rem block border-circle"
-              style="background-color: #f59e0b"
-            ></span>
-            <p class="m-0">Pendiente</p>
+            <p class="m-0">Aprobado - Devuelto</p>
           </div>
           <div class="flex align-items-center gap-1">
             <span
@@ -30,9 +23,15 @@
             ></span>
             <p class="m-0">Rechazado</p>
           </div>
+          <div class="flex align-items-center gap-1">
+            <span
+              class="w-1rem h-1rem block border-circle"
+              style="background-color: #f59e0b"
+            ></span>
+            <p class="m-0">En préstamo</p>
+          </div>
         </div>
       </div>
-      <p><span class="font-bold">IMPORTANTE :</span> Podrás descargar tu solicitud en formato PDF únicamente después de que haya sido aprobada.</p>
     </div>
 
     <p-table
@@ -48,13 +47,16 @@
       <ng-template pTemplate="header">
         <tr>
           <th>#</th>
+          <th>Solicitante</th>
+          <th>Email</th>
+          <th>Cargo</th>
           <th>Fecha de creación</th>
           <th># Equipos solicitados</th>
-          <th>Estado</th>
+          <th>Estado solicitud</th>
           <th>Estado préstamo</th>
-          <th>Fecha límite</th>
+          <th>Duración del préstamo</th>
           <th>Detalle</th>
-          <th>Descargar PDF</th>
+          <th>Marcar devuelto</th>
         </tr>
       </ng-template>
       <ng-template
@@ -65,6 +67,9 @@
       >
         <tr>
           <td>{{ rowIndex + 1 }}</td>
+          <td>{{ item.user.name }} {{ item.user?.lastNames }}</td>
+          <td>{{ item.user.email }}</td>
+          <td>{{ getUserCharge(item.user.role.roleName) }}</td>
           <td>{{ item.dateCreated }}</td>
           <td>{{ item.selectedEquipments.length }}</td>
           <td>
@@ -90,15 +95,17 @@
               styleClass="p-button-text p-button-raised p-button-info"
             ></p-button>
           </td>
-          <td>
-            <span style="color: #9a9a9a;" *ngIf="item.loanRequestStatus.status === 'RECHAZADO' || item.loanRequestStatus.status === 'PENDIENTE'" >No disponible</span>
+          <td class="flex gap-3">
             <p-button
-            *ngIf="item.loanRequestStatus.status === 'APROBADO'"
-            label="Pdf"
-            icon="fa-solid fa-download"
-            styleClass="p-button-text p-button-raised p-button-secondary"
-            (click)="downLoadPdf(item)"
-          ></p-button>
+              icon="fa-solid fa-check"
+              styleClass="p-button-rounded p-button-success p-button-text p-button-raised"
+              (click)="markAsReturned(item.id, item.isInLoan)"
+            ></p-button>
+           <!--  <p-button
+              icon="fa-solid fa-xmark"
+              styleClass="p-button-rounded p-button-danger p-button-text p-button-raised"
+              (click)="approveOrDenyLoanRequest(item.id, 'RECHAZADO')"
+            ></p-button> -->
           </td>
         </tr>
       </ng-template>
@@ -107,9 +114,7 @@
         <tr>
           <td colspan="12">
             <h5 class="text-center p-6" style="color: #9a9a9a">
-              Aún no has realizado ninguna solicitud de préstamo. Realiza una
-              solicitud y aquí podrás encontrar un registro de todas las
-              solicitudes que hayas hecho.
+              No se ha registrado ningún préstamo hasta el momento
             </h5>
           </td>
         </tr>
@@ -117,14 +122,17 @@
 
       <ng-template pTemplate="rowexpansion" let-item>
         <tr>
-          <td colspan="7">
+          <td colspan="12">
             <div class="p-3">
               <div class="row">
                 <div
                   class="flex align-items-center justify-content-between col-12 flex-column md:flex-row col-md-8"
                 >
-                  <p class="text-2xl mb-0" style="color: #9a9a9a">
-                    Detalle equipos solicitados
+                  <p class="text-2xl" style="color: #6b6b6b">
+                    Detalle equipos solicitados por
+                    <span class="font-bold"
+                      >{{ item.user.name }} {{ item.user.lastNames }}</span
+                    >
                   </p>
                 </div>
               </div>
@@ -140,6 +148,8 @@
                     <th>Modelo</th>
                     <th>Clasificación</th>
                     <th>Cantidad</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">

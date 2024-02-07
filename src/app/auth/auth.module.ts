@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-
+import { QrCodeModule } from 'ng-qrcode';
 @NgModule({
   declarations: [
     AuthComponent,
@@ -18,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     AuthRoutingModule,
     FormsModule,
+    QrCodeModule,
     SharedModule
   ]
 })

@@ -28,10 +28,30 @@ export class LoanRequestService {
   }
 
   approveOrDenyLoanRequest(loanRequestId: string, status: string): Observable<any> {
-    return this.httpClient.put(`${this.apiUrl}/loan-request/approve-deny`,null, { withCredentials: true,
+    return this.httpClient.put(`${this.apiUrl}/loan-request/approve-deny`, null, {
+      withCredentials: true,
       params: {
         loanRequestId: loanRequestId,
         status: status
-      }});
+      }
+    });
   }
+
+  updateIfEquipmentsHasReturned(loanRequestId: string, status: boolean): Observable<any> {
+    return this.httpClient.put(`${this.apiUrl}/loan-request/equipments-returned`, null, {
+      withCredentials: true,
+      params: {
+        loanRequestId: loanRequestId,
+        returned: status
+      }
+    });
+  }
+
+  downloadLoanRequestPdf(loanRequest: LoanRequest) {
+    return this.httpClient.post(`${this.apiUrl}/pdf/loan-request`, loanRequest, {
+      withCredentials: true,
+      responseType:'blob'
+     });
+  }
+
 }

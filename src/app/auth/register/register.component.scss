@@ -29,3 +29,8 @@
   color: #9a9a9a;
   font-size: 14px;
 }
+
+::ng-deep.p-inputtext{
+  padding: 4px 12px ;
+  width: 100%;
+}

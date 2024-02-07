@@ -9,6 +9,7 @@ import { EquipmentListComponent } from './equipment-list/equipment-list.componen
 import { SharedModule } from '../shared/shared.module';
 import { LoanRequestComponent } from './loan-request/loan-request.component';
 import { LoanRequestHistoryComponent } from './loan-request-history/loan-request-history.component';
+import { ChangePasswordComponent } from '../auth/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { LoanRequestHistoryComponent } from './loan-request-history/loan-request
     EquipmentListComponent,
     LoanRequestComponent,
     LoanRequestHistoryComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,

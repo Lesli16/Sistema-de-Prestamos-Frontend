@@ -1,0 +1,152 @@
+<div class="row">
+  <div class="col-md-8 container">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">Editar perfil</h5>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.name"
+                  name="name"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Apellidos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.lastNames"
+                  name="lastNames"
+                />
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  [(ngModel)]="user.email"
+                  name="email"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label
+                  >Nombre de usuario - Recuerda que cambiar tu nombre de usuario
+                  requerirá volver a iniciar sesión</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="newUserName"
+                  name="newUserName"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Cédula</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.ci"
+                  name="ci"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Número de teléfono</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.phoneNumber"
+                  name="phoneNumber"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button
+                type="submit"
+                class="btn btn-primary btn-round"
+                (click)="updateUserInfo(user)"
+              >
+                Actualizar Perfil
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8 container change-password">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">Cambiar contraseña</h5>
+      </div>
+      <div class="card-body">
+        <form #changeUserPassword>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Nueva contraseña</label>
+                <p-password
+                  name="password"
+                  #password="ngModel"
+                  required
+                  styleClass="w-full"
+                  [ngClass]="password.errors?.['required'] && (password.dirty || password.touched || submit)?'ng-invalid ng-dirty':''"
+                  [(ngModel)]="newPassword"
+                  [feedback]="false"
+                  [toggleMask]="true"
+                ></p-password>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Confirmar contraseña</label>
+                <p-password
+                  name="confirmPassword"
+                  #confirmPassword="ngModel"
+                  required
+                  styleClass="w-full"
+                  [ngClass]="confirmPassword.errors?.['required'] && (confirmPassword.dirty || confirmPassword.touched || submit)?'ng-invalid ng-dirty':''"
+                  [(ngModel)]="confirmNewPassword"
+                  [feedback]="false"
+                  [toggleMask]="true"
+                ></p-password>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button
+                type="submit"
+                class="btn btn-primary btn-round"
+                (click)="changePassword()"
+              >
+                Actualizar contraseña
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

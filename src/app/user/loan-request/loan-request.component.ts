@@ -30,7 +30,6 @@ export class LoanRequestComponent implements OnInit {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getAllUserEquipmentSelection();
-    this.getAllLoanRequests();
   }
 
   getAllUserEquipmentSelection() {
@@ -100,9 +99,5 @@ export class LoanRequestComponent implements OnInit {
     });
   }
 
-  getAllLoanRequests() {
-    this.loanRequestSrv.getAllLoanRequest().subscribe({
-      next: (data) => console.log(data),
-    });
-  }
+
 }

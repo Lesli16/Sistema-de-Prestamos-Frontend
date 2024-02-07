@@ -12,31 +12,32 @@ export interface RouteInfo {
 }
 
 export const ROUTES_ADMIN: RouteInfo[] = [
-  { path: '/admin/inicio', title: 'Dashboard', icon: 'nc-bank', class: '' },
+  /*   { path: '/admin/inicio', title: 'Dashboard', icon: 'nc-bank', class: '' }, */
+  {
+    path: '/admin/perfil',  title: 'Perfil',  icon: 'nc-single-02',class: ''},
   { path: '/admin/equipos', title: 'Equipos', icon: 'nc-bullet-list-67', class: '' },
   { path: '/admin/aprobar-solicitudes', title: 'Aprobar solicitudes', icon: 'nc-tap-01', class: '' },
-  { path: '/admin/historial-solicitudes', title: 'Historial y Devoluciones', icon: 'nc-diamond', class: '' },
-
-  { path: '/admin/icons', title: 'Icons', icon: 'nc-diamond', class: '' },
-  {
-    path: '/admin/notifications',
-    title: 'Notifications',
-    icon: 'nc-bell-55',
-    class: '',
-  },
-  {
-    path: '/admin/user',
-    title: 'User Profile',
-    icon: 'nc-single-02',
-    class: '',
-  },
-  { path: '/admin/table', title: 'Table List', icon: 'nc-tile-56', class: '' },
-  {
-    path: '/admin/typography',
-    title: 'Typography',
-    icon: 'nc-caps-small',
-    class: '',
-  },
+  { path: '/admin/historial-solicitudes', title: 'Historial y Devoluciones', icon: 'nc-tile-56', class: '' },
+  /*  { path: '/admin/icons', title: 'Icons', icon: 'nc-diamond', class: '' },
+   {
+     path: '/admin/notifications',
+     title: 'Notifications',
+     icon: 'nc-bell-55',
+     class: '',
+   },
+   {
+     path: '/admin/user',
+     title: 'User Profile',
+     icon: 'nc-single-02',
+     class: '',
+   },
+   { path: '/admin/table', title: 'Table List', icon: 'nc-tile-56', class: '' },
+   {
+     path: '/admin/typography',
+     title: 'Typography',
+     icon: 'nc-caps-small',
+     class: '',
+   }, */
   {
     path: '/auth/login',
     title: 'Cerrar sesión',
@@ -72,7 +73,7 @@ export const ROUTES_STUDENT_TEACHER: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   public menuItems: any[] = [];
-  userCharge:string = ''
+  userCharge: string = ''
 
   constructor(private authSrv: AuthService, private toastSrv: ToastrService, private router: Router) { }
 

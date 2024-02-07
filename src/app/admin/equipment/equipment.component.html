@@ -36,16 +36,17 @@
       <ng-template pTemplate="header">
         <tr>
           <th>#</th>
-          <th style="min-width: 15rem">Name</th>
+          <th style="min-width: 15rem">Nombre</th>
           <th>Imagen</th>
           <th>Modelo</th>
           <th class="xl:w-auto">Descripción</th>
+          <th class="xl:w-auto">Ubicación</th>
           <th>Clasificación</th>
           <th>Stock</th>
           <th>Disponibles</th>
           <th>En mantenimiento</th>
           <th>En préstamo</th>
-          <th></th>
+          <th>Editar</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-equipment let-rowIndex="rowIndex">
@@ -55,7 +56,7 @@
           <td>
             <div *ngIf="!equipment.image; else noImage">
               <div
-                class="flex justify-content-center align-items-center shadow-4"
+                class="flex justify-content-center align-items-center"
                 style="width: 50px"
               >
                 <i class="fa-solid fa-image text-3xl py-2"></i>
@@ -66,17 +67,17 @@
                 [src]="decodeImage(equipment.image)"
                 [alt]="equipment.name"
                 width="50"
-                class="shadow-4"
               />
             </ng-template>
           </td>
           <td>{{ equipment.model }}</td>
           <td>{{ equipment.description }}</td>
+          <td>{{ equipment.location }}</td>
           <td>{{ equipment.equipmentClassification.name }}</td>
-          <td>{{ equipment.stock }}</td>
-          <td>{{ equipment.availableQuantity }}</td>
-          <td>{{ equipment.inMaintenanceQuantity }}</td>
-          <td>{{ equipment.onLoanQuantity }}</td>
+          <td class="text-center">{{ equipment.stock }}</td>
+          <td class="text-center">{{ equipment.availableQuantity }}</td>
+          <td class="text-center">{{ equipment.inMaintenanceQuantity }}</td>
+          <td class="text-center">{{ equipment.onLoanQuantity }}</td>
           <td>
             <button
               pButton
@@ -135,6 +136,17 @@
             #description="ngModel"
             [(ngModel)]="equipment.description"
           ></textarea>
+        </div>
+
+        <div class="form-outline">
+          <label class="form-label label-input">Ubicación</label>
+          <input
+            type="text"
+            class="form-control mb-3"
+            name="location"
+            #location="ngModel"
+            [(ngModel)]="equipment.location"
+          />
         </div>
         <div class="form-outline">
           <label class="form-label label-input">Stock</label>
@@ -214,7 +226,6 @@
               *ngIf="equipment.image"
               [alt]="equipment.name"
               width="250"
-              class="shadow-4"
             />
           </div>
         </div>

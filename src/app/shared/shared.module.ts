@@ -10,6 +10,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
+import { PasswordModule } from 'primeng/password';
 const modules = [
   CommonModule,
   DropdownModule,
@@ -21,7 +22,8 @@ const modules = [
   DataViewModule,
   TagModule,
   FormsModule,
-  CalendarModule
+  CalendarModule,
+  PasswordModule
 ];
 
 @NgModule({

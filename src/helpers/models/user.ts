@@ -14,3 +14,8 @@ export interface Role{
   "id":number,
   "roleName":string
 }
+
+export interface ForgotPasswordDto{
+  "newPassword":string
+  "resetPasswordToken":string
+}

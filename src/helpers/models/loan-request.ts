@@ -8,6 +8,7 @@ export interface LoanRequest{
   "selectedEquipments":LoanSelectedEquipment[]
   "loanRequestStatus"?:LoanRequestStatus
   "loanDuration"?:Date
+  "isInLoan"?:boolean
 }
 
 export interface LoanSelectedEquipment{

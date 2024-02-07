@@ -39,6 +39,35 @@ export class LoanRequestHistoryComponent implements OnInit {
     }
   }
 
-  downLoadPdf(){
+  getLoanRequestStatusSeverity(loanStatus: boolean) {
+    if (loanStatus === null) {
+      return 'null'
+    } else if (!loanStatus) {
+      return 'success'
+    } else {
+      return 'warning'
+    }
+  }
+
+  getLoanRequestStatus(loanStatus: boolean) {
+    if (loanStatus === null) {
+      return 'NO REGISTRA'
+    } else if (!loanStatus) {
+      return 'DEVUELTO'
+    } else {
+      return 'EN PRÉSTAMO'
+    }
+  }
+
+  downLoadPdf(loanRequest:LoanRequest){
+    this.loanRequestSrv.downloadLoanRequestPdf(loanRequest).subscribe({
+      next: (data) =>{
+        let newFile = new File([data], 'hola.pdf', {
+          type: 'application/pdf',
+        });
+        let fileURL = URL.createObjectURL(newFile);
+        window.open(fileURL, '_blank');
+      }
+    })
   }
 }
