@@ -25,6 +25,7 @@ export class LoginComponent {
   loading:boolean = false;
   successMessage:string ='';
 
+  showQr:boolean = false
   constructor(private authSrv: AuthService, private toastSrv: ToastrService, private router: Router) { }
 
   login(loginUser: LoginUser) {
@@ -108,5 +109,9 @@ export class LoginComponent {
   closeModal(){
     this.openDialog = false
     this.successMessage = ''
+  }
+
+  showQrCode(){
+    this.showQr = true
   }
 }

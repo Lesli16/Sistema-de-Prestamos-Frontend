@@ -5,13 +5,14 @@ import { LoginUser } from '../models/login-user';
 import { Observable } from 'rxjs';
 import { RegisterUser } from '../models/register-user';
 import { ForgotPasswordDto, User } from '../models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = environment.apiUrl;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router:Router) { }
 
   signIn(loginUser: LoginUser): Observable<any> {
     return this.httpClient.post(`${this.apiUrl}/auth/login`, loginUser, { withCredentials: true });
@@ -26,6 +27,12 @@ export class AuthService {
   }
   logOut(): Observable<any> {
     return this.httpClient.get(`${this.apiUrl}/auth/logout`, { withCredentials: true });
+  }
+
+  logOutInterceptor() {
+    this.httpClient.get(`${this.apiUrl}/auth/logout`, { withCredentials: true })
+      .subscribe(() => { this.router.navigateByUrl('/auth/login'); });
+
   }
 
   sendForgotPasswordEmail(email: string): Observable<any> {

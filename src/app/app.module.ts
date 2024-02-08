@@ -1,3 +1,4 @@
+import { InterceptorProvider, InterceptorService } from './../helpers/service/interceptor.service';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
@@ -26,7 +27,7 @@ import { SharedModule } from './shared/shared.module'
     HttpClientModule,
     SharedModule
   ],
-  providers: [],
+  providers: [InterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

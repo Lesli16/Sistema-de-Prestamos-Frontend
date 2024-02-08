@@ -1,13 +1,23 @@
 .login{
   min-height: 100vh;
-  background-color: #f4f3ef;
-  & .content {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-  }
+  background-image: url("../../../assets/img/espe_campus.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.content{
+  min-height: calc(100vh - 202px);
 }
 
+.login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
 .forgot-password{
   display: flex;
   width: 100%;
@@ -25,10 +35,16 @@
 }
 
 .text-color-tittle{
-  color: #51cbce;
+  color: #99fdff;
 }
 
 ::ng-deep.p-inputtext{
   padding: 4px 12px ;
   width: 100%;
+}
+
+.img_bottom{
+  position: absolute;
+  bottom: 0;
+  right: 30px;
 }

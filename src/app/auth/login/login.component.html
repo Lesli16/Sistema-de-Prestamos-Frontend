@@ -1,29 +1,23 @@
 <!-- Jumbotron -->
-<div class="login">
-  <div class="px-4 py-5 px-md-5 align-items-center text-start content">
-    <div class="container">
-      <div class="row gx-lg-5 align-items-center">
+<div class="login relative">
+  <div class="px-4 py-5 px-md-5 align-items-center flex flex-column  justify-content-center text-start ">
+    <div class="flex flex-column lg:flex-row align-items-center gap-3 mb-3 z-3">
+      <div class="h-5rem">
+        <img src="../../../assets/img/espe_redes_logo.png" style="height: 100%; object-fit: contain;"/>
+      </div>
+      <h1 class="fw-bold m-0 ls-tight uppercase text-center  text-white text-xl sm:text-2xl md:text-4xl lg:text-3xl xl:text-6xl">UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE</h1>
+    </div>
+    <div class="container flex flex-column h-full justify-content-center content z-3 align-items-center">
+      <div class="row gx-lg-5 h-full align-items-center">
+        <div class="img_bottom h-6rem w-6rem lg:h-12rem lg:w-12rem">
+          <img src="../../../assets/img/espe_redes_telecomunicaciones.jpg" style="height: 100%; width: 100%; object-fit: contain;"/>
+        </div>
         <div class="col-lg-6 mb-5 mb-lg-0">
-          <h1 class="fw-bold ls-tight text-5xl">
-            Plataforma para<br />
-            <span class="text-color-tittle">estudiantes y docentes</span>
+          <h1
+            class="fw-bold m-0 ls-tight line-height-3 uppercase text-center text-color-tittle text-lg md:text-3xl lg:text-5xl"
+          >
+            Sistema de préstamo de equipos de laboratorio de comunicaciones
           </h1>
-          <p style="color: rgb(117, 127, 142)">
-            ¡Completa el formulario para acceder a tu panel y disfrutar de todas
-            las funcionalidades diseñadas para ti!
-          </p>
-          <div class="flex flex-column align-items-center">
-            <p style="color: rgb(117, 127, 142)">
-              ¡Comparte este sistema con otros a través de este código QR!
-            </p>
-            <qr-code
-              value="https://www.google.com/"
-              size="100"
-              errorCorrectionLevel="M"
-              lightColor="#f4f3ef"
-            >
-            </qr-code>
-          </div>
         </div>
         <div class="col-lg-6 mb-5 mb-lg-0">
           <div class="card">
@@ -70,12 +64,20 @@
                   </label>
                 </div>
                 <div class="row">
+                  <small class="col-sm-12 mb-4">
+                    <p class="fw-bold m-0 cursor-pointer" (click)="showQrCode()">
+                      ¡Comparte este sistema con otros a través de un código QR!
+                    </p>
+                  </small>
+                </div>
+                <div class="row">
                   <small class="col-sm-12">
                     <a routerLink="/auth/register" class="text-info fw-bold"
                       >No tienes una cuenta? Regístrate</a
                     >
                   </small>
                 </div>
+
                 <!-- Submit button -->
                 <button
                   type="submit"
@@ -140,6 +142,27 @@
           </div>
         </form>
       </div>
+    </ng-template>
+  </p-dialog>
+  <p-dialog
+    [(visible)]="showQr"
+    [breakpoints]="{ '960px': '75vw'}" [style]="{ width: '250px' }"
+    header="Código QR"
+    [modal]="true"
+    [draggable]="false"
+    [closable]="true"
+    [closeOnEscape]="true"
+    styleClass="p-fluid"
+  >
+    <ng-template pTemplate="content">
+      <div class="flex justify-content-center">
+        <qr-code
+        value="https://www.google.com/"
+        size="200"
+        errorCorrectionLevel="M"
+        >
+      </qr-code>
+    </div>
     </ng-template>
   </p-dialog>
 </div>
